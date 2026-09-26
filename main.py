@@ -1,20 +1,22 @@
-def add(digit_a, digit_b):
+def add(num_a, num_b):
     total = ""
     over = 0
 
-    digit_a = str(digit_a)
-    digit_b = str(digit_b)
+    num_a = str(num_a)
+    num_b = str(num_b)
 
-    len_a = len(digit_a)
-    len_b = len(digit_b)
+    len_a = len(num_a)
+    len_b = len(num_b)
 
     if len_a > len_b:
-        digit_b = "0"*(len_a-len_b)+digit_b
+        num_b = "0"*(len_a-len_b)+num_b
     else:
-        digit_a = "0"*(len_b-len_a)+digit_a
+        num_a = "0"*(len_b-len_a)+num_a
+    
+    nlen = len_a
 
-    for i in range(len_a):
-        result = sub_one_add(digit_a[len_a-i-1], digit_b[len_a-i-1], over)
+    for i in range(nlen):
+        result = _units_add(num_a[nlen - i - 1], num_b[nlen - i - 1], over)
 
         over = result[1]
         total += str(result[0])
@@ -24,9 +26,9 @@ def add(digit_a, digit_b):
 
     return total[::-1]
 
-def sub_one_add(a,b,over):
+def _units_add(a,b,carry):
     result = [0,0]
-    sum = int(a) + int(b) + int(over)
+    sum = int(a) + int(b) + int(carry)
     if len(str(sum)) > 1:
         result[1] = int(str(sum)[:1])
         result[0] = int(str(sum)[1:])
@@ -34,6 +36,9 @@ def sub_one_add(a,b,over):
         result[0] = int(sum)
     
     return result
+
+def subtract(num_a, num_b):
+    return ""
 
 while True:
     a = input("a: ")
